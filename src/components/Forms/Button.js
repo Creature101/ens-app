@@ -31,7 +31,9 @@ const ButtonContainer = styled('button')`
 `
 
 const types = {
-  primary: '#5384FE'
+  primary: '#5384FE',
+  inactive: '#DFDFDF',
+  hollow: 'transparent'
 }
 
 const Button = ({ children, type = 'primary' }) => (

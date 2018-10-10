@@ -6,7 +6,8 @@ import { DetailsItem, DetailsKey, DetailsValue } from './DetailsItem'
 import DefaultEtherScanLink from '../ExternalLinks/EtherScanLink'
 import Input from '../Forms/Input'
 import Button from '../Forms/Button'
-import { ReactComponent as Bin } from '../Icons/Pencil.svg'
+import Pencil from '../Forms/Pencil'
+import Bin from '../Forms/Bin'
 import Editable from './Editable'
 
 const EtherScanLink = styled(DefaultEtherScanLink)`
@@ -36,8 +37,6 @@ const RecordsKey = styled(DetailsKey)`
 const RecordsValue = styled(DetailsValue)`
   font-size: 14px;
 `
-
-const EditButton = styled(Bin)``
 
 const EditRecord = styled('div')`
   width: 100%;
@@ -78,11 +77,11 @@ class RecordItem extends Component {
               </RecordsValue>
               {editing ? (
                 <Action>
-                  <Cancel onClick={stopEditing}>Cancel</Cancel>
+                  <Bin />
                 </Action>
               ) : (
                 <Action>
-                  <EditButton onClick={startEditing} />
+                  <Pencil onClick={startEditing} />
                 </Action>
               )}
             </RecordsContent>
@@ -94,7 +93,9 @@ class RecordItem extends Component {
                 </EditRecord>
                 <SaveContainer>
                   <Save onClick={() => {}}>Save</Save>
-                  <Button onClick={stopEditing}>Cancel</Button>
+                  <Button type="hollow" onClick={stopEditing}>
+                    Cancel
+                  </Button>
                 </SaveContainer>
               </>
             ) : (
