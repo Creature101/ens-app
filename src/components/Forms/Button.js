@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'react-emotion'
 import { Link } from 'react-router-dom'
 
-const ButtonContainer = styled(Link)`
+const ButtonContainer = styled('button')`
   color: white;
   background: ${p => p.color};
   padding: 10px 25px;
@@ -16,10 +16,17 @@ const ButtonContainer = styled(Link)`
   transition: 0.2s all;
 
   &:hover {
-    cursor: ${p => (p.href ? 'pointer' : 'auto')};
+    cursor: pointer;
     background: #2c46a6;
     box-shadow: 0 10px 21px 0 rgba(161, 175, 184, 0.89);
     border-radius: 23px;
+  }
+
+  a {
+    color: white;
+    &:focus {
+      outline: 0;
+    }
   }
 `
 
@@ -27,9 +34,13 @@ const types = {
   primary: '#5384FE'
 }
 
-const Button = ({ children, type = 'primary', href }) => (
-  <ButtonContainer to={href || ''} color={types[type]} href={href}>
-    {children}
+const Button = ({ children, type = 'primary' }) => (
+  <ButtonContainer color={types[type]}>{children}</ButtonContainer>
+)
+
+export const ButtonLink = ({ children, type = 'primary', to = '' }) => (
+  <ButtonContainer color={types[type]}>
+    <Link to={to}>{children}</Link>
   </ButtonContainer>
 )
 

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'react-emotion'
 
 import { DetailsItem, DetailsKey, DetailsValue } from './DetailsItem'
 import DefaultEtherScanLink from '../ExternalLinks/EtherScanLink'
 import Input from '../Forms/Input'
+import Button from '../Forms/Button'
 import { ReactComponent as Bin } from '../Icons/Pencil.svg'
 import Editable from './Editable'
 
@@ -14,6 +16,15 @@ const EtherScanLink = styled(DefaultEtherScanLink)`
 const RecordsItem = styled(DetailsItem)`
   border-top: 1px dashed #d3d3d3;
   padding: 20px;
+  flex-direction: column;
+
+  background: ${({ editing }) => (editing ? '#F0F6FA' : 'white')};
+`
+
+const RecordsContent = styled('div')`
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
 `
 
 const RecordsKey = styled(DetailsKey)`
@@ -28,34 +39,64 @@ const RecordsValue = styled(DetailsValue)`
 
 const EditButton = styled(Bin)``
 
-const EditRecord = styled('div')``
+const EditRecord = styled('div')`
+  width: 100%;
+`
+
+const Action = styled('div')`
+  position: absolute;
+  right: 10px;
+  top: 0;
+`
+
+const SaveContainer = styled('div')`
+  display: flex;
+  justify-content: flex-end;
+`
+
+const Save = styled(Button)`
+  margin-right: 20px;
+`
 
 const Cancel = styled('div')``
 
 class RecordItem extends Component {
   _renderEditable() {
-    const { name, value, type } = this.props
+    const { keyName, value, type, mutation } = this.props
     return (
       <Editable>
         {({ editing, startEditing, stopEditing, newValue, updateValue }) => (
           <RecordsItem editing={editing}>
-            <RecordsKey>{name}</RecordsKey>
-            <RecordsValue>
-              {type === 'address' ? (
-                <EtherScanLink address={value}>{value}</EtherScanLink>
+            <RecordsContent>
+              <RecordsKey>{keyName}</RecordsKey>
+              <RecordsValue>
+                {type === 'address' ? (
+                  <EtherScanLink address={value}>{value}</EtherScanLink>
+                ) : (
+                  value
+                )}
+              </RecordsValue>
+              {editing ? (
+                <Action>
+                  <Cancel onClick={stopEditing}>Cancel</Cancel>
+                </Action>
               ) : (
-                value
+                <Action>
+                  <EditButton onClick={startEditing} />
+                </Action>
               )}
-            </RecordsValue>
+            </RecordsContent>
+
             {editing ? (
-              <Cancel onClick={stopEditing}>Cancel</Cancel>
-            ) : (
-              <EditButton onClick={startEditing} />
-            )}
-            {editing ? (
-              <EditRecord>
-                <Input onChange={updateValue} />
-              </EditRecord>
+              <>
+                <EditRecord>
+                  <Input onChange={updateValue} />
+                </EditRecord>
+                <SaveContainer>
+                  <Save onClick={() => {}}>Save</Save>
+                  <Button onClick={stopEditing}>Cancel</Button>
+                </SaveContainer>
+              </>
             ) : (
               ''
             )}
@@ -66,10 +107,10 @@ class RecordItem extends Component {
   }
 
   _renderViewOnly() {
-    const { name, value, type } = this.props
+    const { keyName, value, type } = this.props
     return (
       <RecordsItem>
-        <RecordsKey>{name}</RecordsKey>
+        <RecordsKey>{keyName}</RecordsKey>
         <RecordsValue>
           {type === 'address' ? (
             <EtherScanLink address={value}>{value}</EtherScanLink>
@@ -84,6 +125,13 @@ class RecordItem extends Component {
     const { isOwner } = this.props
     return isOwner ? this._renderEditable() : this._renderViewOnly()
   }
+}
+
+RecordItem.propTypes = {
+  name: PropTypes.string,
+  value: PropTypes.string,
+  type: PropTypes.string,
+  mutation: PropTypes.func
 }
 
 export default RecordItem
