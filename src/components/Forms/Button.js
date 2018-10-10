@@ -36,8 +36,10 @@ const types = {
   hollow: 'transparent'
 }
 
-const Button = ({ children, type = 'primary' }) => (
-  <ButtonContainer color={types[type]}>{children}</ButtonContainer>
+const Button = ({ children, type = 'primary', onClick }) => (
+  <ButtonContainer color={types[type]} onClick={onClick}>
+    {children}
+  </ButtonContainer>
 )
 
 export const ButtonLink = ({ children, type = 'primary', to = '' }) => (
