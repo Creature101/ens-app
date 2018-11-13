@@ -111,7 +111,7 @@ export async function buildSubDomain(label, node, owner) {
   }
 }
 
-export async function createSubdomain(subDomain, domain) {
+export async function createSubDomain(subDomain, domain) {
   let { ENS, web3 } = await getENS()
   let accounts = await getAccounts()
   let node = await getNamehash(domain)

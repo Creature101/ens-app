@@ -9,7 +9,7 @@ import {
   setResolver,
   setAddress,
   setContent,
-  createSubdomain
+  createSubDomain
 } from '../registry'
 import { getEntry } from '../registrar'
 import { query } from '../subDomainRegistrar'
@@ -235,7 +235,7 @@ const resolvers = {
     },
     createSubdomain: async (_, { name, label }, { cache }) => {
       try {
-        const tx = await createSubdomain(label, name)
+        const tx = await createSubDomain(label, name)
         console.log(tx)
         return tx
       } catch (e) {
