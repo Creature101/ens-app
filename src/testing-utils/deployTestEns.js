@@ -1,7 +1,7 @@
-import fs from 'fs'
-import solc from 'solc'
+const fs = require('fs')
+const solc = require('solc')
 
-export default async function deployENS({ web3, accounts }) {
+module.exports = async function deployENS({ web3, accounts }) {
   let ensRoot
   let reverseRegistrar
   let publicResolver
@@ -11,11 +11,11 @@ export default async function deployENS({ web3, accounts }) {
   // If the deployer contract needs updating you can run
   // `npm run compile` to compile it to ensContracts.json
   //
-  let source = fs.readFileSync('./src/api/__tests__/ens.sol').toString()
-  let compiled = solc.compile(source, 1)
-  // let compiled = JSON.parse(
-  //   fs.readFileSync('./src/api/__tests__/ensContracts.json')
-  // )
+  // let source = fs.readFileSync('./src/api/__tests__/ens.sol').toString()
+  // let compiled = solc.compile(source, 1)
+  let compiled = JSON.parse(
+    fs.readFileSync('./src/api/__tests__/ensContracts.json')
+  )
 
   let deployer = compiled.contracts[':DeployENS']
   let reverseRegistrarABI = compiled.contracts[':ReverseRegistrar'].interface
@@ -43,21 +43,21 @@ export default async function deployENS({ web3, accounts }) {
   // Fetch the address of the ENS registry
   ensRoot = await new Promise((resolve, reject) => {
     deployens.ens.call((err, value) => {
-      expect(err).toBe(null)
+      if (err) throw new Error('deploy registry failed')
       resolve(value)
     })
   })
 
   reverseRegistrar = await new Promise((resolve, reject) => {
     deployens.reverseregistrar.call((err, value) => {
-      expect(err).toBe(null)
+      if (err) throw new Error('reverse registrar failed')
       resolve(value)
     })
   })
 
   publicResolver = await new Promise((resolve, reject) => {
     deployens.publicresolver.call((err, value) => {
-      expect(err).toBe(null)
+      if (err) throw new Error('public resolver failed')
       resolve(value)
     })
   })

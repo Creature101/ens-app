@@ -106,6 +106,7 @@ async function setupWeb3(customProvider) {
 
 function getWeb3() {
   if (ready === false && web3 === undefined) {
+    console.log(process.argv)
     return setupWeb3()
   } else {
     return new Promise(function(resolve, reject) {

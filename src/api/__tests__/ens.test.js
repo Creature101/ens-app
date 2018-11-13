@@ -26,7 +26,7 @@ import {
 import getENS, { getNamehash } from '../ens'
 import '../../testing-utils/extendExpect'
 import Web3 from 'web3'
-import deployTestEns from '../../testing-utils/deployTestEns'
+import deployTestEns from '../../testing-utils/deployTestEns.js'
 
 const ENVIRONMENTS = ['GANACHE_GUI', 'GANACHE_CLI', 'GANACHE_CLI_MANUAL']
 const ENV = ENVIRONMENTS[1]

@@ -14,6 +14,11 @@ import { ApolloProvider } from 'react-apollo'
 import { NotificationsProvider } from './Notifications'
 import { GlobalStateProvider } from './globalState'
 import './globalStyles'
+import getENS from './api/ens'
+
+if (process.env.REACT_APP_ENS_ADDRESS) {
+  getENS(process.env.REACT_APP_ENS_ADDRESS)
+}
 
 const cache = new InMemoryCache({
   addTypename: true
