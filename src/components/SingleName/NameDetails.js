@@ -125,7 +125,7 @@ class NameDetails extends Component {
                       keyName="Resolver"
                       type="address"
                       value={domain.resolver}
-                      publicResolver={data.publicResolver}
+                      publicResolver={data && data.publicResolver}
                       isOwner={isOwner}
                       domain={domain}
                       mutationButton="Save"

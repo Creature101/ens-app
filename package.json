@@ -35,7 +35,8 @@
     "react-transition-group-plus": "^0.5.3",
     "recompose": "^0.27.0",
     "state": "^0.2.0",
-    "web3": "^0.19.0"
+    "web3": "^0.19.0",
+    "web3-1.0": "npm:web3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,6 +50,7 @@
     "preTest": "node --experimental-modules src/testing-utils/preTestScript.mjs",
     "eject": "react-scripts eject",
     "compile": "node --experimental-modules src/testing-utils/compileENS.mjs",
+    "compile2": "node --experimental-modules src/testing-utils/compileENS2.mjs",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "deploy:dev": "npm run build && npm run postbuild && surge build ensappdev.surge.sh",
@@ -60,6 +62,7 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "@ensdomains/ens": "^0.1.1",
     "@storybook/addon-actions": "^3.4.10",
     "@storybook/addon-links": "^3.4.10",
     "@storybook/react": "^3.4.10",

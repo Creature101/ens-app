@@ -65,6 +65,7 @@ const resolvers = {
     },
     publicResolver: async () => {
       const resolver = await getAddr('resolver.eth')
+      console.log('here', resolver)
       return {
         address: resolver,
         __typename: 'Resolver'
