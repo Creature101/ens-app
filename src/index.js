@@ -17,7 +17,7 @@ import './globalStyles'
 import getENS from './api/ens'
 
 // if (process.env.REACT_APP_ENS_ADDRESS) {
-//   console.log('have ens address')
+//   console.log('have')
 //   getENS(process.env.REACT_APP_ENS_ADDRESS)
 // }
 

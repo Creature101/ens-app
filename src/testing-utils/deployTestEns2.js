@@ -54,6 +54,7 @@ module.exports = async function deployENS({ web3, accounts }) {
 
   const ensContract = ens.methods
   const resolverContract = resolver.methods
+  const reverseRegistrarContract = reverseRegistrar.methods
 
   console.log('ens registry address', ens._address)
   console.log('resolver', resolver._address)
@@ -101,6 +102,16 @@ module.exports = async function deployENS({ web3, accounts }) {
     .send({
       from: accounts[0]
     })
+
+  console.log(reverseRegistrarContract)
+
+  try {
+    await reverseRegistrarContract
+      .setName('deployer.eth')
+      .send({ from: accounts[0] })
+  } catch (e) {
+    console.log(e)
+  }
 
   const addrReverseOwner = await ensContract
     .owner(namehash('resolver.eth'))

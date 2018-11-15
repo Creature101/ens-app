@@ -79,11 +79,14 @@ const getFifsRegistrarContract = () => {
   })
 }
 
-const getENS = async (
-  ensAddress = '0x192c2Ad4099248aecb553332714d4160021d3eb7',
-  web3Instance
-) => {
+const getENS = async (ensAddress, web3Instance) => {
   var { web3, networkId } = await getWeb3()
+
+  if (process.env.REACT_APP_ENS_ADDRESS) {
+    ensAddress = process.env.REACT_APP_ENS_ADDRESS
+  }
+
+  console.log(ensAddress)
 
   if (!ENS) {
     if (!ensAddress) {
